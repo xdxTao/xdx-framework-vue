@@ -7,6 +7,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import router from './router.js'
 
+// 设置title
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle)
+
 // 全局引入 ElementUi
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
@@ -19,7 +23,9 @@ import { Button,
     MenuItem,
     MenuItemGroup,
     Tooltip,
-    Input } from 'element-ui'
+    Input,
+    Table,
+    TableColumn } from 'element-ui'
 Vue.use(Button)
 
 Vue.use(Menu)
@@ -28,6 +34,8 @@ Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(Tooltip)
 Vue.use(Input)
+Vue.use(Table)
+Vue.use(TableColumn)
 
 new Vue({
     render: h => h(App),

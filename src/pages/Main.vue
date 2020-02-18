@@ -24,8 +24,9 @@
             <span>用户管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
+            <router-link to="/userlist">
+              <el-menu-item index="2-1">用户列表</el-menu-item>
+            </router-link>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
@@ -34,10 +35,10 @@
             <span slot="title">工具测试</span>
           </template>
           <el-menu-item-group>
-            <router-link to="/Payment">
+            <router-link to="/pay/payment">
               <el-menu-item index="3-1">支付测试</el-menu-item>
             </router-link>
-            <router-link to="/Payment">
+            <router-link to="/">
               <el-menu-item index="3-2">邮件测试</el-menu-item>
             </router-link>
           </el-menu-item-group>
@@ -71,16 +72,19 @@ export default {
     },
     methods: {
         handleOpen(key, keyPath) {
-            console.log(key, keyPath)
+
         },
         handleClose(key, keyPath) {
-            console.log(key, keyPath)
+
         }
     }
 }
 </script>
 <style lang="scss" scoped>
     .main{
+		a{
+			text-decoration: none;
+		}
         .left_width_1{
             width: 210px;
              background: linear-gradient(to right, #536976, #292e49);

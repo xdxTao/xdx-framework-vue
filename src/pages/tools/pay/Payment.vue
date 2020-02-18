@@ -52,7 +52,7 @@
   </div>
 </template>
 <script>
-import { fetchList } from '@/api/tools/payment'
+import { fetchList } from '@/api/payment'
 export default {
     data() {
         return {
@@ -67,8 +67,6 @@ export default {
     methods: {
         submit() {
             fetchList(this.payInfo).then(resp => {
-                // 支付宝支付
-
                 // 添加之前先删除一下，如果单页面，页面不刷新，添加进去的内容会一直保留在页面中，二次调用form表单会出错
                 const divForm = document.getElementsByTagName('divform')
                 if (divForm.length) {
