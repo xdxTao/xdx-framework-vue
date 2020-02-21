@@ -2,7 +2,7 @@
  * ajax请求配置
  */
 import axios from 'axios'
-// import { Message } from 'element-ui'
+import { Message } from 'element-ui'
 
 // axios默认配置
 axios.defaults.timeout = 10000 // 超时时间
@@ -33,13 +33,12 @@ axios.interceptors.request.use(
 // 路由响应拦截
 axios.interceptors.response.use(
     response => {
-        // if (response.data.success === false) {
-        //     Message.error(response.data.errDesc)
-        //     return
-        // } else {
-        //     return response.data
-        // }
-        return response
+        if (response.data.success === false) {
+            Message.error(response.data.errDesc)
+            return
+        } else {
+            return response.data
+        }
     },
     error => {
         return Promise.reject(error.response) // 返回接口返回的错误信息

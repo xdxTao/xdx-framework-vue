@@ -25,7 +25,10 @@ import { Button,
     Tooltip,
     Input,
     Table,
-    TableColumn } from 'element-ui'
+    TableColumn,
+    Drawer,
+    Message,
+    Switch } from 'element-ui'
 Vue.use(Button)
 
 Vue.use(Menu)
@@ -36,6 +39,10 @@ Vue.use(Tooltip)
 Vue.use(Input)
 Vue.use(Table)
 Vue.use(TableColumn)
+Vue.use(Drawer)
+Vue.use(Switch)
+
+Vue.prototype.$message = Message
 
 new Vue({
     render: h => h(App),

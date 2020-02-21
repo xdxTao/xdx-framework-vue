@@ -18,31 +18,20 @@
             <span slot="title">首页</span>
           </el-menu-item>
         </router-link>
-        <el-submenu index="2">
+
+        <el-submenu v-for="(item,i) in menus" :key="i" :index="item.menuAddr">
           <template slot="title">
-            <i class="el-icon-user-solid" />
-            <span>用户管理</span>
+            <i :class="item.menuImg" />
+            <span>{{ item.menuName }}</span>
           </template>
           <el-menu-item-group>
-            <router-link to="/userlist">
-              <el-menu-item index="2-1">用户列表</el-menu-item>
+            <router-link v-for="(iten,j) in item.lists" :key="j" :to="iten.menuAddr">
+              <el-menu-item :index="iten.menuAddr">{{ iten.menuName }}</el-menu-item>
             </router-link>
+
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-s-tools" />
-            <span slot="title">工具测试</span>
-          </template>
-          <el-menu-item-group>
-            <router-link to="/pay/payment">
-              <el-menu-item index="3-1">支付测试</el-menu-item>
-            </router-link>
-            <router-link to="/">
-              <el-menu-item index="3-2">邮件测试</el-menu-item>
-            </router-link>
-          </el-menu-item-group>
-        </el-submenu>
+
       </el-menu>
     </div>
     <div class="right">
@@ -64,11 +53,16 @@
 </template>
 
 <script>
+import { menuList } from '@/api/authority'
 export default {
     data() {
         return {
-            isCollapse: false
+            isCollapse: false,
+            menus: []
         }
+    },
+    created() {
+        this.getList()
     },
     methods: {
         handleOpen(key, keyPath) {
@@ -76,6 +70,15 @@ export default {
         },
         handleClose(key, keyPath) {
 
+        },
+        // 获取菜单列表数据
+        getList() {
+            const param = {
+                flag: 2
+            }
+            menuList(param).then(resp => {
+                this.menus = resp.data
+            })
         }
     }
 }
