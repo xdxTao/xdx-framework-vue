@@ -28,9 +28,12 @@ import { Button,
     TableColumn,
     Drawer,
     Message,
-    Switch } from 'element-ui'
-Vue.use(Button)
+    Switch,
+    Checkbox,
+    CheckboxGroup,
+    Divider } from 'element-ui'
 
+Vue.use(Button)
 Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
@@ -41,6 +44,9 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Drawer)
 Vue.use(Switch)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(Divider)
 
 Vue.prototype.$message = Message
 

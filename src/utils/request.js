@@ -34,8 +34,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         if (response.data.success === false) {
-            Message.error(response.data.errDesc)
-            return
+            return Message.error(response.data.errDesc)
         } else {
             return response.data
         }
