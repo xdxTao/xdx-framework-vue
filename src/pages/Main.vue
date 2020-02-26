@@ -43,7 +43,29 @@
           </div>
 
         </div>
-        <div class="right" />
+        <div class="right">
+          <el-popover
+            placement="bottom"
+            width="80"
+            trigger="click"
+          >
+            <div>
+              <div class="user-box">
+                首页
+              </div>
+              <div class="user-box">
+                个人信息
+              </div>
+              <div class="user-box" @click="loginOut">
+                退出登录
+              </div>
+            </div>
+            <div slot="reference" class="userImg">
+              <img src="https://s2.ax1x.com/2020/02/26/3aZoa8.png">
+            </div>
+          </el-popover>
+
+        </div>
       </div>
       <div class="bottom">
         <router-view />
@@ -53,7 +75,10 @@
 </template>
 
 <script>
+
 import { menuList } from '@/api/authority'
+import { loginOut } from '@/api/usermgmt'
+import { removeToken } from '@/utils/auth'
 export default {
     data() {
         return {
@@ -78,6 +103,13 @@ export default {
             }
             menuList(param).then(resp => {
                 this.menus = resp.data
+            })
+        },
+        // 退出登录
+        loginOut() {
+            loginOut().then(resp => {
+                removeToken()
+                window.location.href = '/login'
             })
         }
     }
@@ -127,6 +159,23 @@ export default {
                     width: 50%;
                     height: 45px;
                     border-left: 1px blue solid;
+					// 头像部分
+					.userImg{
+						width: 35px;
+						height: 35px;
+						float: right;
+						margin-right: 20px;
+						border-radius: 100px;
+						margin-top: 5px;
+						img{
+							width: 35px;
+							height: 35px;
+
+						}
+					}
+					.userImg:hover{
+						cursor: pointer;
+					}
                 }
             }
             .bottom{
@@ -178,5 +227,17 @@ export default {
         outline: none;
         background-color: #292e49 !important;
     }
-
+	.el-popover{
+		min-width: 80px !important;
+	}
+	.user-box{
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+	}
+	.user-box:hover{
+		cursor: pointer;
+		border-bottom: 1px gainsboro solid;
+		border-top: 1px gainsboro solid;
+	}
 </style>

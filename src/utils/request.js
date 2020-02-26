@@ -2,10 +2,14 @@
  * ajax请求配置
  */
 import axios from 'axios'
+// import store from '../store/index'
 import { Message } from 'element-ui'
+import { getToken } from '@/utils/auth'
+import router from '../router'
 
 // axios默认配置
 axios.defaults.timeout = 10000 // 超时时间
+// axios.defaults.baseURL 请求地址前缀
 // User地址
 // axios.defaults.baseURL = 'http://127.0.0.1:8001'
 // tools地址
@@ -22,8 +26,10 @@ axios.defaults.transformRequest = function(data) {
 // 路由请求拦截
 axios.interceptors.request.use(
     config => {
+        // 当前路由地址
+        console.log(router.history.current.path)
         config.headers['Content-Type'] = 'application/json;charset=UTF-8'
-
+        config.headers.common['X-Token'] = getToken()
         return config
     },
     error => {
@@ -34,7 +40,11 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         if (response.data.success === false) {
-            return Message.error(response.data.errDesc)
+            if (response.data.code === 401) {
+                window.location.href = '/login'
+            } else {
+                return Message.error(response.data.errDesc)
+            }
         } else {
             return response.data
         }

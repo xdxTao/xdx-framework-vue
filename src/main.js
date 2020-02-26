@@ -11,6 +11,13 @@ import router from './router.js'
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
+// 引入store
+import store from './store/index'
+
+// 引入Cookies持久化 js-cookies
+import Cookies from 'js-cookie'
+Vue.use(Cookies)
+
 // 全局引入 ElementUi
 // import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
@@ -31,7 +38,8 @@ import { Button,
     Switch,
     Checkbox,
     CheckboxGroup,
-    Divider } from 'element-ui'
+    Divider,
+    Popover } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Menu)
@@ -47,10 +55,12 @@ Vue.use(Switch)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Divider)
+Vue.use(Popover)
 
 Vue.prototype.$message = Message
 
 new Vue({
     render: h => h(App),
-    router
+    router,
+    store
 }).$mount('#app')
