@@ -39,7 +39,10 @@ import { Button,
     Checkbox,
     CheckboxGroup,
     Divider,
-    Popover } from 'element-ui'
+    Popover,
+    Select,
+    Option,
+    Radio } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Menu)
@@ -56,6 +59,9 @@ Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Divider)
 Vue.use(Popover)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Radio)
 
 Vue.prototype.$message = Message
 

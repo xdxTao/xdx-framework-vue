@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-import { addRole, roleList, roleUpdate, authorityList, authoritySave, listbyroleId } from '@/api/authority'
+import { addRole, roleList, roleUpdate, authorityList, authoritySave, listByRoleId } from '@/api/authority'
 export default {
     data() {
         return {
@@ -65,13 +65,13 @@ export default {
             roleList().then(resp => {
                 this.roleLists = resp.data
                 this.authority.roleId = this.roleLists[0].roleId
-                this.getListbyroleId(this.authority.roleId)
+                this.getListByRoleId(this.authority.roleId)
             })
         },
         roleActiveFun(roleId, i) {
             this.authority.roleId = roleId
             this.roleActive = i
-            this.getListbyroleId(roleId)
+            this.getListByRoleId(roleId)
         },
         // 编辑权限
         editRole(row) {
@@ -106,11 +106,11 @@ export default {
             })
         },
         // 根据roleId获取权限
-        getListbyroleId(roleId) {
+        getListByRoleId(roleId) {
             const query = {
                 roleId: roleId
             }
-            listbyroleId(query).then(resp => {
+            listByRoleId(query).then(resp => {
                 this.authority.selectList = resp.data
             })
         }

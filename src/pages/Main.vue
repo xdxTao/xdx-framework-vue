@@ -12,25 +12,31 @@
         @open="handleOpen"
         @close="handleClose"
       >
-        <router-link to="/">
-          <el-menu-item index="1">
-            <i class="el-icon-s-home" />
-            <span slot="title">首页</span>
-          </el-menu-item>
-        </router-link>
 
-        <el-submenu v-for="(item,i) in menus" :key="i" :index="item.menuAddr">
-          <template slot="title">
-            <i :class="item.menuImg" />
-            <span>{{ item.menuName }}</span>
-          </template>
-          <el-menu-item-group>
-            <router-link v-for="(iten,j) in item.lists" :key="j" :to="iten.menuAddr">
-              <el-menu-item :index="iten.menuAddr">{{ iten.menuName }}</el-menu-item>
+        <div v-for="(item,i) in menus" :key="i">
+          <div v-if="item.lists.length === 0">
+            <router-link :to="item.menuAddr">
+              <el-menu-item :index="item.menuAddr">
+                <i :class="item.menuImg" />
+                <span slot="title">{{ item.menuName }}</span>
+              </el-menu-item>
             </router-link>
+          </div>
+          <div v-else>
+            <el-submenu :index="item.menuAddr">
+              <template slot="title">
+                <i :class="item.menuImg" />
+                <span>{{ item.menuName }}</span>
+              </template>
+              <el-menu-item-group>
+                <router-link v-for="(iten,j) in item.lists" :key="j" :to="iten.menuAddr">
+                  <el-menu-item :index="iten.menuAddr">{{ iten.menuName }}</el-menu-item>
+                </router-link>
+              </el-menu-item-group>
+            </el-submenu>
+          </div>
 
-          </el-menu-item-group>
-        </el-submenu>
+        </div>
 
       </el-menu>
     </div>
@@ -98,10 +104,7 @@ export default {
         },
         // 获取菜单列表数据
         getList() {
-            const param = {
-                flag: 2
-            }
-            menuList(param).then(resp => {
+            menuList().then(resp => {
                 this.menus = resp.data
             })
         },

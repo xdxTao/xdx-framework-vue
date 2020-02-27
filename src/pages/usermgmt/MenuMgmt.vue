@@ -158,7 +158,7 @@
   </div>
 </template>
 <script>
-import { addMenu, menuList, menuUpdate } from '@/api/authority'
+import { addMenu, meanMgmtList, menuUpdate } from '@/api/authority'
 export default {
     data() {
         return {
@@ -255,9 +255,7 @@ export default {
             const param = {
                 flag: 1
             }
-            menuList(param).then(resp => {
-                console.log(resp)
-
+            meanMgmtList(param).then(resp => {
                 this.tableData = resp.data
             })
         }

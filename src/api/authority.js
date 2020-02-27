@@ -30,6 +30,20 @@ export function menuList(query) {
 }
 
 /**
+ * 菜单管理列表
+ * @param {*} query
+ * @author 小道仙
+ * @date 2020年2月27日
+ */
+export function meanMgmtList(query) {
+    return request({
+        url: '/myuser/authority/menuMgmt/list',
+        method: 'get',
+        params: query
+    })
+}
+
+/**
  * 更新菜单
  * @param {*} data
  * @author 小道仙
@@ -119,9 +133,9 @@ export function authoritySave(data) {
  * @author 小道仙
  * @date 2020年2月22日
  */
-export function listbyroleId(query) {
+export function listByRoleId(query) {
     return request({
-        url: '/myuser/authority/listbyroleId',
+        url: '/myuser/authority/listByRoleId',
         method: 'get',
         params: query
     })

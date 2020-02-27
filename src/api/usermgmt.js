@@ -39,3 +39,33 @@ export function loginOut(query) {
         params: query
     })
 }
+
+/**
+ * 新增用户
+ *
+ * @param {*} data
+ * @author 小道仙
+ * @date 2020年2月27日
+ */
+export function userSave(data) {
+    return request({
+        url: '/myuser/user/save',
+        method: 'post',
+        data
+    })
+}
+
+/**
+ * 更新用户
+ *
+ * @param {*} data
+ * @author 小道仙
+ * @date 2020年2月27日
+ */
+export function userUpdate(data) {
+    return request({
+        url: '/myuser/user/update',
+        method: 'post',
+        data
+    })
+}

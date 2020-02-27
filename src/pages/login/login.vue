@@ -29,7 +29,7 @@
           </div>
           <div class="box">
             <img src="../../static/icon/password.png">
-            <input v-model="user.userPassword" placeholder="请输入密码...">
+            <input v-model="user.userPassword" type="password" placeholder="请输入密码...">
           </div>
           <div class="box_1">
             <div class="remenberMe">

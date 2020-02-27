@@ -27,9 +27,10 @@ axios.defaults.transformRequest = function(data) {
 axios.interceptors.request.use(
     config => {
         // 当前路由地址
-        console.log(router.history.current.path)
+        // console.log(router.history.current.path)
         config.headers['Content-Type'] = 'application/json;charset=UTF-8'
         config.headers.common['X-Token'] = getToken()
+        config.headers.common['menuId'] = router.history.current.path
         return config
     },
     error => {
