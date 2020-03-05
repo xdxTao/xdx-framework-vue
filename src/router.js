@@ -3,9 +3,11 @@ import VueRouter from 'vue-router' // 导入路由的包
 const Payment = () => import('./pages/tools/pay/Payment.vue')
 const Error = () => import('./pages/tools/pay/Error.vue')
 const Success = () => import('./pages/tools/pay/Success.vue')
+const RocketMQ = () => import('./pages/tools/RocketMQ.vue')
 const UserList = () => import('./pages/usermgmt/UserList.vue')
 const MenuMgmt = () => import('./pages/usermgmt/MenuMgmt.vue')
 const AuthorityMgmt = () => import('./pages/usermgmt/AuthorityMgmt.vue')
+const Message = () => import('./pages/usermgmt/Message.vue')
 
 // 3. 创建路由对象
 var router = new VueRouter({
@@ -16,7 +18,9 @@ var router = new VueRouter({
         { path: '/pay/success', component: Success, meta: { title: '支付成功' }},
         { path: '/user/userlist', component: UserList, meta: { title: '用户列表' }},
         { path: '/user/menumgmt', component: MenuMgmt, meta: { title: '菜单管理' }},
-        { path: '/user/authority', component: AuthorityMgmt, meta: { title: '权限管理' }}
+        { path: '/user/authority', component: AuthorityMgmt, meta: { title: '权限管理' }},
+        { path: '/tools/rocketmq', component: RocketMQ, meta: { title: 'MQ测试' }},
+        { path: '/message', component: Message, meta: { title: '消息管理' }}
         // { path: '*',component: error, meta: {title: '页面走丢了'} },
 
     ],

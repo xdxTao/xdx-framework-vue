@@ -73,7 +73,7 @@ export default {
                     document.body.removeChild(divForm[0])
                 }
                 const div = document.createElement('divform')
-                div.innerHTML = resp.data // data就是接口返回的form 表单字符串
+                div.innerHTML = resp // data就是接口返回的form 表单字符串
                 document.body.appendChild(div)
                 document.forms[0].setAttribute('target', '_blank') // 新开窗口跳转
                 document.forms[0].submit()

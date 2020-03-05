@@ -42,7 +42,9 @@ import { Button,
     Popover,
     Select,
     Option,
-    Radio } from 'element-ui'
+    Radio,
+    Transfer,
+    Badge } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Menu)
@@ -62,6 +64,8 @@ Vue.use(Popover)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Radio)
+Vue.use(Transfer)
+Vue.use(Badge)
 
 Vue.prototype.$message = Message
 

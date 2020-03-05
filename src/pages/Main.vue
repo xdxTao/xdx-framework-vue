@@ -12,30 +12,29 @@
         @open="handleOpen"
         @close="handleClose"
       >
-
+        <!--
+			这个 el-submenu 标签外面不能有任何标签包裹，不然折叠的时候异常
+			但是如果外面不套个标签没办法循环
+		-->
         <div v-for="(item,i) in menus" :key="i">
-          <div v-if="item.lists.length === 0">
-            <router-link :to="item.menuAddr">
-              <el-menu-item :index="item.menuAddr">
-                <i :class="item.menuImg" />
-                <span slot="title">{{ item.menuName }}</span>
-              </el-menu-item>
-            </router-link>
-          </div>
-          <div v-else>
-            <el-submenu :index="item.menuAddr">
-              <template slot="title">
-                <i :class="item.menuImg" />
-                <span>{{ item.menuName }}</span>
-              </template>
-              <el-menu-item-group>
-                <router-link v-for="(iten,j) in item.lists" :key="j" :to="iten.menuAddr">
-                  <el-menu-item :index="iten.menuAddr">{{ iten.menuName }}</el-menu-item>
-                </router-link>
-              </el-menu-item-group>
-            </el-submenu>
-          </div>
+          <router-link v-if="item.lists.length === 0" :to="item.menuAddr">
+            <el-menu-item :index="item.menuAddr">
+              <i :class="item.menuImg" />
+              <span slot="title">{{ item.menuName }}</span>
+            </el-menu-item>
+          </router-link>
 
+          <el-submenu v-else :index="item.menuAddr">
+            <template slot="title">
+              <i :class="item.menuImg" />
+              <span> {{ item.menuName }}</span>
+            </template>
+            <el-menu-item-group>
+              <router-link v-for="(iten,j) in item.lists" :key="j" :to="iten.menuAddr">
+                <el-menu-item :index="iten.menuAddr">{{ iten.menuName }}</el-menu-item>
+              </router-link>
+            </el-menu-item-group>
+          </el-submenu>
         </div>
 
       </el-menu>
@@ -50,6 +49,13 @@
 
         </div>
         <div class="right">
+          <div class="message">
+            <el-badge :value="1" class="item" :max="9">
+              <router-link to="/message"> <i class="el-icon-message-solid" /></router-link>
+            </el-badge>
+
+          </div>
+
           <el-popover
             placement="bottom"
             width="80"
@@ -162,6 +168,19 @@ export default {
                     width: 50%;
                     height: 45px;
                     border-left: 1px blue solid;
+					display: flex;
+					justify-content: flex-end;
+					// 消息部分
+					.message{
+						width: 20px;
+						height: 20px;
+						margin-top: 12px;
+						margin-right: 10px;
+						// border: 1px red solid;
+						i{
+							font-size: 20px;
+						}
+					}
 					// 头像部分
 					.userImg{
 						width: 35px;

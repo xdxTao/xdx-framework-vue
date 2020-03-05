@@ -69,3 +69,18 @@ export function userUpdate(data) {
         data
     })
 }
+
+/**
+ * 用户列表Dto
+ *
+ * @param {*} data
+ * @author 小道仙
+ * @date 2020年3月5日
+ */
+export function userDtoList(query) {
+    return request({
+        url: '/myuser/user/listDto',
+        method: 'get',
+        params: query
+    })
+}
