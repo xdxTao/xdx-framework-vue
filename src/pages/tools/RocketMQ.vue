@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <el-input
-      v-model="messageInfo.content"
+      v-model="messageInfo.message"
       type="textarea"
       :rows="3"
       placeholder="请输入内容"
@@ -21,14 +21,15 @@
 
 <script>
 import { userDtoList } from '@/api/usermgmt'
+import { send } from '@/api/message'
 export default {
     data() {
         return {
             data: [],
             value: [],
             messageInfo: {
-                content: '',
-                users: []
+                message: '',
+                userIds: []
             }
         }
     },
@@ -42,14 +43,25 @@ export default {
             })
         },
         submit() {
-            if (this.messageInfo.content == null || this.messageInfo.content === '') {
+            if (this.messageInfo.message == null || this.messageInfo.message === '') {
                 return this.$message.error('请填写要发送的消息!')
             }
             if (this.value == null || this.value.length <= 0) {
                 return this.$message.error('请选择消息接收者!')
             }
-            this.messageInfo.users = this.value
-            console.log(this.messageInfo)
+            this.messageInfo.userIds = this.value
+            send(this.messageInfo).then(resp => {
+                if (resp.success === true) {
+                    this.$message.success(resp.msg)
+                    this.data = []
+                    this.value = []
+                    this.messageInfo = {
+                        message: '',
+                        userIds: []
+                    }
+                    this.userDtoList()
+                }
+            })
         }
     }
 }

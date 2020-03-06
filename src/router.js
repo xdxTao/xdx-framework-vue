@@ -20,7 +20,7 @@ var router = new VueRouter({
         { path: '/user/menumgmt', component: MenuMgmt, meta: { title: '菜单管理' }},
         { path: '/user/authority', component: AuthorityMgmt, meta: { title: '权限管理' }},
         { path: '/tools/rocketmq', component: RocketMQ, meta: { title: 'MQ测试' }},
-        { path: '/message', component: Message, meta: { title: '消息管理' }}
+        { path: '/other/message', component: Message, meta: { title: '消息管理' }}
         // { path: '*',component: error, meta: {title: '页面走丢了'} },
 
     ],

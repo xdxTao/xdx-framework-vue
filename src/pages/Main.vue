@@ -50,10 +50,10 @@
         </div>
         <div class="right">
           <div class="message">
-            <el-badge :value="1" class="item" :max="9">
-              <router-link to="/message"> <i class="el-icon-message-solid" /></router-link>
+            <el-badge v-if="unreadCount > 0" :value="unreadCount" class="item" :max="9">
+              <router-link to="/other/message"> <i class="el-icon-message-solid" /></router-link>
             </el-badge>
-
+            <router-link v-else to="/other/message"> <i class="el-icon-message-solid" /></router-link>
           </div>
 
           <el-popover
@@ -91,15 +91,18 @@
 import { menuList } from '@/api/authority'
 import { loginOut } from '@/api/usermgmt'
 import { removeToken } from '@/utils/auth'
+import { getUnreadCount } from '@/api/message'
 export default {
     data() {
         return {
             isCollapse: false,
-            menus: []
+            menus: [],
+            unreadCount: 0
         }
     },
     created() {
         this.getList()
+        this.getUnreadCount()
     },
     methods: {
         handleOpen(key, keyPath) {
@@ -119,6 +122,12 @@ export default {
             loginOut().then(resp => {
                 removeToken()
                 window.location.href = '/login'
+            })
+        },
+        // 获取未处理消息数
+        getUnreadCount() {
+            getUnreadCount().then(resp => {
+                this.unreadCount = resp.data
             })
         }
     }
