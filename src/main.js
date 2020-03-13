@@ -44,7 +44,8 @@ import { Button,
     Option,
     Radio,
     Transfer,
-    Badge } from 'element-ui'
+    Badge,
+    Pagination } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Menu)
@@ -66,6 +67,7 @@ Vue.use(Option)
 Vue.use(Radio)
 Vue.use(Transfer)
 Vue.use(Badge)
+Vue.use(Pagination)
 
 Vue.prototype.$message = Message
 

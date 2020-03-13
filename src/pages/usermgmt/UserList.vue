@@ -2,8 +2,8 @@
   <div class="mian">
     <div class="top">
       <div class="left">
-        <el-input style="width:200px;" size="medium" placeholder="用户名 \ 电话" />
-        <el-select v-model="userData.roleId" size="medium" placeholder="角色选择..." style="width:200px;margin-left:10px;">
+        <el-input v-model="search.userName" style="width:200px;" size="medium" placeholder="用户名 \ 电话" />
+        <el-select v-model="search.roleId" :clearable="true" size="medium" placeholder="角色选择..." style="width:200px;margin-left:10px;">
           <el-option
             v-for="item in roles"
             :key="item.roleId"
@@ -11,7 +11,7 @@
             :value="item.roleId"
           />
         </el-select>
-        <el-button style="margin-left:20px;" size="medium">搜索</el-button>
+        <el-button style="margin-left:20px;" size="medium" @click="getUserList">搜索</el-button>
       </div>
       <div class="right">
         <div class="add_user" @click="drawer = !drawer">添加用户</div>
@@ -52,6 +52,18 @@
         </el-table-column>
       </el-table>
     </div>
+
+    <!-- 分页部分 -->
+    <div class="pagination">
+      <el-pagination
+        :current-page.sync="search.page"
+        layout="prev, pager, next"
+        :total="total"
+        @current-change="changePage"
+      />
+    </div>
+
+    <!-- 添加/编辑 弹窗 -->
     <el-drawer
       :title="drawerTitke"
       :visible.sync="drawer"
@@ -138,7 +150,13 @@ export default {
                 headImgPath: '', 	// 用户头像
                 userStatus: '', 	// 用户状态
                 userId: ''			// 用户ID编辑的时候用
-            }
+            },
+            search: {		// 条件搜索
+                page: 1,	// 当前页
+                userName: '', // 用户名/电话号码
+                roleId: '' // 角色id
+            },
+            total: 1 		// 总条数
         }
     },
     created() {
@@ -147,7 +165,8 @@ export default {
     },
     methods: {
         getUserList() {
-            userlist().then(resp => {
+            userlist(this.search).then(resp => {
+                this.total = resp.total
                 this.tableData = resp.data
             })
         },
@@ -205,6 +224,10 @@ export default {
                         this.handleClose()
                     }
                 })
+        },
+        // 换页
+        changePage(page) {
+            this.getUserList()
         }
 
     }
@@ -276,10 +299,16 @@ export default {
 				color: white;
 			}
 		}
+		// 分页
+		.pagination{
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 20px;
+		}
     }
 
 	.edit:hover{
-				cursor: pointer;
-				color: green;
-			}
+		cursor: pointer;
+		color: green;
+	}
 </style>
